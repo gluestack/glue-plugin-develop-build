@@ -7,6 +7,10 @@ import IInstance from "@gluestack/framework/types/plugin/interface/IInstance";
 import ILifeCycle from "@gluestack/framework/types/plugin/interface/ILifeCycle";
 import IManagesInstances from "@gluestack/framework/types/plugin/interface/IManagesInstances";
 import IGlueStorePlugin from "@gluestack/framework/types/store/interface/IGluePluginStore";
+import { developList } from "./commands/developList";
+import { developUp } from "./commands/developUp";
+import { developDown } from "./commands/developDown";
+import { build } from "./commands/build";
 
 //Do not edit the name of this class
 export class GlueStackPlugin implements IPlugin, IManagesInstances, ILifeCycle {
@@ -22,7 +26,10 @@ export class GlueStackPlugin implements IPlugin, IManagesInstances, ILifeCycle {
   }
 
   init() {
-    //
+    this.app.addCommand((program: any) => developList(program, this));
+    this.app.addCommand((program: any) => developUp(program, this));
+    this.app.addCommand((program: any) => developDown(program, this));
+    this.app.addCommand((program: any) => build(program, this));
   }
 
   destroy() {
@@ -46,7 +53,7 @@ export class GlueStackPlugin implements IPlugin, IManagesInstances, ILifeCycle {
   }
 
   getInstallationPath(target: string): string {
-    return '';
+    return "";
   }
 
   async runPostInstall(instanceName: string, target: string) {

@@ -42,6 +42,10 @@ exports.__esModule = true;
 exports.GlueStackPlugin = void 0;
 var package_json_1 = __importDefault(require("../package.json"));
 var PluginInstance_1 = require("./PluginInstance");
+var developList_1 = require("./commands/developList");
+var developUp_1 = require("./commands/developUp");
+var developDown_1 = require("./commands/developDown");
+var build_1 = require("./commands/build");
 var GlueStackPlugin = (function () {
     function GlueStackPlugin(app, gluePluginStore) {
         this.type = "stateless";
@@ -50,6 +54,11 @@ var GlueStackPlugin = (function () {
         this.gluePluginStore = gluePluginStore;
     }
     GlueStackPlugin.prototype.init = function () {
+        var _this = this;
+        this.app.addCommand(function (program) { return (0, developList_1.developList)(program, _this); });
+        this.app.addCommand(function (program) { return (0, developUp_1.developUp)(program, _this); });
+        this.app.addCommand(function (program) { return (0, developDown_1.developDown)(program, _this); });
+        this.app.addCommand(function (program) { return (0, build_1.build)(program, _this); });
     };
     GlueStackPlugin.prototype.destroy = function () {
     };
@@ -66,7 +75,7 @@ var GlueStackPlugin = (function () {
         return "".concat(process.cwd(), "/node_modules/").concat(this.getName(), "/template");
     };
     GlueStackPlugin.prototype.getInstallationPath = function (target) {
-        return '';
+        return "";
     };
     GlueStackPlugin.prototype.runPostInstall = function (instanceName, target) {
         return __awaiter(this, void 0, void 0, function () {
