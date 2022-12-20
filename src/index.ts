@@ -7,15 +7,12 @@ import IInstance from "@gluestack/framework/types/plugin/interface/IInstance";
 import ILifeCycle from "@gluestack/framework/types/plugin/interface/ILifeCycle";
 import IManagesInstances from "@gluestack/framework/types/plugin/interface/IManagesInstances";
 import IGlueStorePlugin from "@gluestack/framework/types/store/interface/IGluePluginStore";
-import { developList } from "./commands/developList";
-import { developUp } from "./commands/developUp";
-import { developDown } from "./commands/developDown";
-import { build } from "./commands/build";
 
 //Do not edit the name of this class
 export class GlueStackPlugin implements IPlugin, IManagesInstances, ILifeCycle {
   app: IApp;
   instances: IInstance[];
+  type: "stateless" | "stateful" | "devonly" = "stateless";
   gluePluginStore: IGlueStorePlugin;
 
   constructor(app: IApp, gluePluginStore: IGlueStorePlugin) {
@@ -25,10 +22,7 @@ export class GlueStackPlugin implements IPlugin, IManagesInstances, ILifeCycle {
   }
 
   init() {
-    this.app.addCommand((program: any) => developList(program, this));
-    this.app.addCommand((program: any) => developUp(program, this));
-    this.app.addCommand((program: any) => developDown(program, this));
-    this.app.addCommand((program: any) => build(program, this));
+    //
   }
 
   destroy() {
@@ -43,16 +37,34 @@ export class GlueStackPlugin implements IPlugin, IManagesInstances, ILifeCycle {
     return packageJSON.version;
   }
 
+  getType(): "stateless" | "stateful" | "devonly" {
+    return this.type;
+  }
+
   getTemplateFolderPath(): string {
     return `${process.cwd()}/node_modules/${this.getName()}/template`;
   }
 
-  async runPostInstall(target: string) {
+  getInstallationPath(target: string): string {
+    return null;
+  }
+
+  async runPostInstall(instanceName: string, target: string) {
     return;
   }
 
-  createInstance(key: string, gluePluginStore: IGlueStorePlugin): IInstance {
-    const instance = new PluginInstance(this.app, this, key, gluePluginStore);
+  createInstance(
+    key: string,
+    gluePluginStore: IGlueStorePlugin,
+    installationPath: string,
+  ): IInstance {
+    const instance = new PluginInstance(
+      this.app,
+      this,
+      key,
+      gluePluginStore,
+      installationPath,
+    );
     this.instances.push(instance);
     return instance;
   }
