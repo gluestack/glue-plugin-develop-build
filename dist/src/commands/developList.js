@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.runner = exports.developList = void 0;
 function developList(program, glueStackPlugin) {
-    var command = program
+    program
         .command("develop:list")
         .description("Lists all the container instances")
         .action(function () { return runner(glueStackPlugin); });
@@ -51,10 +51,11 @@ function runner(glueStackPlugin) {
             arr = [];
             glueStackPlugin.app
                 .getContainerTypePluginInstances(false)
-                .filter(function (instance) {
+                .forEach(function (instance) {
                 if (instance && (instance === null || instance === void 0 ? void 0 : instance.containerController)) {
                     arr.push({
-                        instance: instance.getName(),
+                        plugin: instance.callerPlugin.getName(),
+                        type: instance.callerPlugin.getType(),
                         status: instance.getContainerController().getStatus(),
                         port: instance.getContainerController().getPortNumber() || "-",
                         "container_id/pid": instance.getContainerController().getContainerId() || "-"
