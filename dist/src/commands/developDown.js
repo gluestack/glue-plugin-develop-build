@@ -73,6 +73,7 @@ function runner(instanceName, glueStackPlugin) {
                 case 1:
                     if (!(_a < downInstances_1.length)) return [3, 7];
                     instance = downInstances_1[_a];
+                    if (!(instance && (instance === null || instance === void 0 ? void 0 : instance.containerController))) return [3, 6];
                     console.log("Stopping: ".concat(instance.getName(), " instance"));
                     _b.label = 2;
                 case 2:

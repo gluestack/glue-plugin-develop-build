@@ -37,17 +37,19 @@ export async function runner(
   }
 
   for (const instance of upInstances) {
-    console.log(`Starting: ${instance.getName()} instance`);
-    try {
-      await instance.containerController.up();
-      console.log(`Success: ${instance.getName()} instance is up`);
-    } catch (e) {
-      console.log(
-        `Failed: ${instance.getName()} instance could not be started`,
-      );
+    if (instance && instance?.containerController) {
+      console.log(`Starting: ${instance.getName()} instance`);
+      try {
+        await instance.containerController.up();
+        console.log(`Success: ${instance.getName()} instance is up`);
+      } catch (e) {
+        console.log(
+          `Failed: ${instance.getName()} instance could not be started`,
+        );
 
-      console.log("\x1b[33m\nError:\x1b[31m", e.message, "\x1b[0m");
+        console.log("\x1b[33m\nError:\x1b[31m", e.message, "\x1b[0m");
+      }
+      console.log();
     }
-    console.log();
   }
 }

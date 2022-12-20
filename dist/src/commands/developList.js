@@ -48,15 +48,18 @@ function runner(glueStackPlugin) {
     return __awaiter(this, void 0, void 0, function () {
         var arr;
         return __generator(this, function (_a) {
-            arr = glueStackPlugin.app
+            arr = [];
+            glueStackPlugin.app
                 .getContainerTypePluginInstances(false)
-                .map(function (instance) {
-                return {
-                    instance: instance.getName(),
-                    status: instance.getContainerController().getStatus(),
-                    port: instance.getContainerController().getPortNumber() || "-",
-                    "container_id/pid": instance.getContainerController().getContainerId() || "-"
-                };
+                .filter(function (instance) {
+                if (instance && (instance === null || instance === void 0 ? void 0 : instance.containerController)) {
+                    arr.push({
+                        instance: instance.getName(),
+                        status: instance.getContainerController().getStatus(),
+                        port: instance.getContainerController().getPortNumber() || "-",
+                        "container_id/pid": instance.getContainerController().getContainerId() || "-"
+                    });
+                }
             });
             console.table(arr);
             return [2];

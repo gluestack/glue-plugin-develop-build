@@ -10,16 +10,19 @@ export function developList(program: any, glueStackPlugin: GlueStackPlugin) {
 }
 
 export async function runner(glueStackPlugin: GlueStackPlugin) {
-  const arr = glueStackPlugin.app
+  const arr: any = [];
+  glueStackPlugin.app
     .getContainerTypePluginInstances(false)
-    .map((instance: IPlugin & IHasContainerController) => {
-      return {
-        instance: instance.getName(),
-        status: instance.getContainerController().getStatus(),
-        port: instance.getContainerController().getPortNumber() || "-",
-        "container_id/pid":
-          instance.getContainerController().getContainerId() || "-",
-      };
+    .filter((instance: IPlugin & IHasContainerController) => {
+      if (instance && instance?.containerController) {
+        arr.push({
+          instance: instance.getName(),
+          status: instance.getContainerController().getStatus(),
+          port: instance.getContainerController().getPortNumber() || "-",
+          "container_id/pid":
+            instance.getContainerController().getContainerId() || "-",
+        });
+      }
     });
   console.table(arr);
 }
