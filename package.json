@@ -1,14 +1,14 @@
 {
-  "name": "@gluestack/glue-plugin-develop-build",
-  "version": "0.0.9",
+  "name": "@gluestack/glue-plugin-dev-process-manager",
+  "version": "0.0.1",
   "description": "gluestack plugin for local develop and production build",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gluestack/glue-plugin-develop-build"
+    "url": "https://github.com/gluestack/glue-plugin-dev-process-manager"
   },
   "keywords": [
     "npm",
-    "glue-plugin-develop-build"
+    "glue-plugin-dev-process-manager"
   ],
   "author": "Shivam Singhal",
   "license": "ISC",
