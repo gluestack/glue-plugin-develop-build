@@ -17,7 +17,7 @@ export async function runner(glueStackPlugin: GlueStackPlugin) {
     .forEach((instance: IInstance & IHasContainerController) => {
       if (instance && instance?.containerController) {
         arr.push({
-          plugin: instance.callerPlugin.getName(),
+          instance: instance.getName(),
           type: instance.callerPlugin.getType(),
           status: instance.getContainerController().getStatus(),
           port: instance.getContainerController().getPortNumber() || "-",

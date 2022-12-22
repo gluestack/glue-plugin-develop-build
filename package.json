@@ -1,6 +1,6 @@
 {
   "name": "@gluestack/glue-plugin-develop-build",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "gluestack plugin for local develop and production build",
   "repository": {
     "type": "git",

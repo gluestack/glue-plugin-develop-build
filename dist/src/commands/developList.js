@@ -54,7 +54,7 @@ function runner(glueStackPlugin) {
                 .forEach(function (instance) {
                 if (instance && (instance === null || instance === void 0 ? void 0 : instance.containerController)) {
                     arr.push({
-                        plugin: instance.callerPlugin.getName(),
+                        instance: instance.getName(),
                         type: instance.callerPlugin.getType(),
                         status: instance.getContainerController().getStatus(),
                         port: instance.getContainerController().getPortNumber() || "-",
