@@ -37,7 +37,12 @@ export async function runner(
   }
 
   for (const instance of buildInstances) {
-    if (instance && instance?.containerController) {
+    if (
+      instance &&
+      //@ts-ignore
+      instance.callerPlugin.getType() === "stateless" &&
+      instance?.containerController
+    ) {
       console.log(`Building: ${instance.getName()} instance`);
       try {
         await instance.containerController.build();
