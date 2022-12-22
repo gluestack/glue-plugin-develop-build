@@ -79,7 +79,16 @@ var GlueStackPlugin = (function () {
     };
     GlueStackPlugin.prototype.runPostInstall = function (instanceName, target) {
         return __awaiter(this, void 0, void 0, function () {
+            var devProcessManagerPlugin;
             return __generator(this, function (_a) {
+                devProcessManagerPlugin = this.app.getPluginByName("@gluestack/glue-plugin-dev-process-manager");
+                if (devProcessManagerPlugin &&
+                    devProcessManagerPlugin.getInstances() &&
+                    devProcessManagerPlugin.getInstances()[0]) {
+                    throw new Error("Dev process manager instance already installed as ".concat(devProcessManagerPlugin
+                        .getInstances()[0]
+                        .getName()));
+                }
                 return [2];
             });
         });
