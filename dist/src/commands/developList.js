@@ -57,7 +57,9 @@ function runner(glueStackPlugin) {
                         instance: instance.getName(),
                         type: instance.callerPlugin.getType(),
                         status: instance.getContainerController().getStatus(),
-                        port: instance.getContainerController().getPortNumber() || "-",
+                        port: instance.getContainerController().getStatus() === "up"
+                            ? instance.getContainerController().portNumber || "-"
+                            : "-",
                         "container_id/pid": instance.getContainerController().getContainerId() || "-"
                     });
                 }
