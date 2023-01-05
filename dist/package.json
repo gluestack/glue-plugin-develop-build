@@ -1,6 +1,6 @@
 {
     "name": "@gluestack/glue-plugin-dev-process-manager",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "gluestack plugin for local develop and production build",
     "repository": {
         "type": "git",

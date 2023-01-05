@@ -55,6 +55,7 @@ function runner(glueStackPlugin) {
                 if (instance && (instance === null || instance === void 0 ? void 0 : instance.containerController)) {
                     arr.push({
                         instance: instance.getName(),
+                        package: instance.callerPlugin.getName(),
                         type: instance.callerPlugin.getType(),
                         status: instance.getContainerController().getStatus(),
                         port: instance.getContainerController().getStatus() === "up"

@@ -18,6 +18,7 @@ export async function runner(glueStackPlugin: GlueStackPlugin) {
       if (instance && instance?.containerController) {
         arr.push({
           instance: instance.getName(),
+          package: instance.callerPlugin.getName(),
           type: instance.callerPlugin.getType(),
           status: instance.getContainerController().getStatus(),
           port:
