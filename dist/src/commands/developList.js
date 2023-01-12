@@ -37,20 +37,45 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.runner = exports.developList = void 0;
+function isGluePackage(packageName, gluePackageName) {
+    if (packageName === gluePackageName) {
+        return true;
+    }
+    if (gluePackageName.startsWith('@')) {
+        var arr = gluePackageName.split(['/']);
+        if (arr[1] && arr[1] === "glue-plugin-".concat(packageName)) {
+            return true;
+        }
+    }
+    return false;
+}
+;
 function developList(program, glueStackPlugin) {
     program
         .command("develop:list")
         .description("Lists all the container instances")
-        .action(function () { return runner(glueStackPlugin); });
+        .option("--filter <package-name>", "Filter the package")
+        .action(function (args) { return runner(glueStackPlugin, args); });
 }
 exports.developList = developList;
-function runner(glueStackPlugin) {
+function runner(glueStackPlugin, args) {
     return __awaiter(this, void 0, void 0, function () {
         var arr;
         return __generator(this, function (_a) {
             arr = [];
-            glueStackPlugin.app
-                .getContainerTypePluginInstances(false)
+            glueStackPlugin.app.getContainerTypePluginInstances(false)
+                .filter(function (instance) {
+                var packageName = args.filter;
+                var instanceName = instance.getName();
+                var gluePackageName = instance.callerPlugin.getName();
+                if (!packageName && packageName !== "")
+                    return instance;
+                if (packageName
+                    && instanceName === packageName
+                    || isGluePackage(packageName, gluePackageName)) {
+                    return instance;
+                }
+            })
                 .forEach(function (instance) {
                 if (instance && (instance === null || instance === void 0 ? void 0 : instance.containerController)) {
                     arr.push({
@@ -65,6 +90,10 @@ function runner(glueStackPlugin) {
                     });
                 }
             });
+            if (!arr.length) {
+                return [2, console.error("No package exist!")];
+            }
+            ;
             console.table(arr);
             return [2];
         });
