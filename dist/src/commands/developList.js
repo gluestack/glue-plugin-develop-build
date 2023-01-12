@@ -37,19 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.runner = exports.developList = void 0;
-function isGluePackage(packageName, gluePackageName) {
-    if (packageName === gluePackageName) {
-        return true;
-    }
-    if (gluePackageName.startsWith('@')) {
-        var arr = gluePackageName.split(['/']);
-        if (arr[1] && arr[1] === "glue-plugin-".concat(packageName) || arr[1] === packageName) {
-            return true;
-        }
-    }
-    return false;
-}
-;
+var isGluePackage_1 = require("../helpers/isGluePackage");
 function developList(program, glueStackPlugin) {
     program
         .command("develop:list")
@@ -72,7 +60,7 @@ function runner(glueStackPlugin, args) {
                     return instance;
                 if (packageName
                     && instanceName === packageName
-                    || isGluePackage(packageName, gluePackageName)) {
+                    || (0, isGluePackage_1.isGluePackage)(packageName, gluePackageName)) {
                     return instance;
                 }
             })
