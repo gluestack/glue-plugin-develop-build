@@ -9,7 +9,7 @@ function isGluePackage(packageName: string, gluePackageName: string): boolean {
   if (gluePackageName.startsWith('@')) {
     // @ts-ignore
     let arr = gluePackageName.split(['/']);
-    if (arr[1] && arr[1] === `glue-plugin-${packageName}`) {
+    if (arr[1] && arr[1] === `glue-plugin-${packageName}` || arr[1] === packageName) {
       return true;
     }
   }

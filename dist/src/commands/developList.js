@@ -43,7 +43,7 @@ function isGluePackage(packageName, gluePackageName) {
     }
     if (gluePackageName.startsWith('@')) {
         var arr = gluePackageName.split(['/']);
-        if (arr[1] && arr[1] === "glue-plugin-".concat(packageName)) {
+        if (arr[1] && arr[1] === "glue-plugin-".concat(packageName) || arr[1] === packageName) {
             return true;
         }
     }
