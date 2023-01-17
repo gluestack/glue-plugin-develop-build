@@ -43,6 +43,7 @@ exports.GlueStackPlugin = void 0;
 var package_json_1 = __importDefault(require("../package.json"));
 var PluginInstance_1 = require("./PluginInstance");
 var developList_1 = require("./commands/developList");
+var developWatch_1 = require("./commands/developWatch");
 var developUp_1 = require("./commands/developUp");
 var developDown_1 = require("./commands/developDown");
 var build_1 = require("./commands/build");
@@ -58,6 +59,7 @@ var GlueStackPlugin = (function () {
         this.app.addCommand(function (program) { return (0, developList_1.developList)(program, _this); });
         this.app.addCommand(function (program) { return (0, developUp_1.developUp)(program, _this); });
         this.app.addCommand(function (program) { return (0, developDown_1.developDown)(program, _this); });
+        this.app.addCommand(function (program) { return (0, developWatch_1.developWatch)(program, _this); });
         this.app.addCommand(function (program) { return (0, build_1.build)(program, _this); });
     };
     GlueStackPlugin.prototype.destroy = function () {
