@@ -157,3 +157,35 @@ import { Canvas, Meta, Story } from "@storybook/addon-docs";
     **Note:** Passing **--filter** is optional.
 
   </details>
+
+<br/>
+
+* <details>
+  <summary>
+    <strong> develop:watch</strong>
+  </summary>
+
+  <br/>
+
+  * This command will run our applicaion in **watch** mode. Whenever we save changes in our
+    plugin instances which have **watch() function** included in them, then this command will
+    automatically restart our **instance containers**. 
+
+    It will **watch** for all those plugin instances inside which we have implemented **watch()
+    function**.
+
+    The **watch()** function should return an array of strings. Those strings are the **file
+    path** upon which our application will run on watch mode.
+    
+    
+    In order to run this command we need to enter the following command:
+
+    <br/>
+
+    ```
+    node glue develop:watch
+    ```
+
+    <br/>
+
+  </details>
