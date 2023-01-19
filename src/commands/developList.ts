@@ -1,20 +1,7 @@
 import { GlueStackPlugin } from "src";
+import { isGluePackage } from "../helpers/isGluePackage";
 import IInstance from "@gluestack/framework/types/plugin/interface/IInstance";
 import IHasContainerController from "@gluestack/framework/types/plugin/interface/IHasContainerController";
-
-function isGluePackage(packageName: string, gluePackageName: string): boolean {
-  if (packageName === gluePackageName) {
-    return true;
-  }
-  if (gluePackageName.startsWith('@')) {
-    // @ts-ignore
-    let arr = gluePackageName.split(['/']);
-    if (arr[1] && arr[1] === `glue-plugin-${packageName}` || arr[1] === packageName) {
-      return true;
-    }
-  }
-  return false;
-};
 
 export function developList(program: any, glueStackPlugin: GlueStackPlugin) {
   program
