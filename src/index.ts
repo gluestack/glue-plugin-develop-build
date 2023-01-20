@@ -8,10 +8,11 @@ import ILifeCycle from "@gluestack/framework/types/plugin/interface/ILifeCycle";
 import IManagesInstances from "@gluestack/framework/types/plugin/interface/IManagesInstances";
 import IGlueStorePlugin from "@gluestack/framework/types/store/interface/IGluePluginStore";
 
-import { developList } from "./commands/developList";
-import { developWatch } from "./commands/developWatch";
-import { developUp } from "./commands/developUp";
-import { developDown } from "./commands/developDown";
+import { routeGenerate } from "./commands/route-generate";
+import { developList } from "./commands/develop-list";
+import { developWatch } from "./commands/develop-watch";
+import { developUp } from "./commands/develop-up";
+import { developDown } from "./commands/develop-down";
 import { build } from "./commands/build";
 
 //Do not edit the name of this class
@@ -33,6 +34,7 @@ export class GlueStackPlugin implements IPlugin, IManagesInstances, ILifeCycle {
     this.app.addCommand((program: any) => developDown(program, this));
     this.app.addCommand((program: any) => developWatch(program, this));
     this.app.addCommand((program: any) => build(program, this));
+    this.app.addCommand((program: any) => routeGenerate(program, this));
   }
 
   destroy() {

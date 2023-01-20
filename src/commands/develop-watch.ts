@@ -2,7 +2,7 @@ import { join } from 'path';
 import { GlueStackPlugin } from "src";
 import IPlugin from "@gluestack/framework/types/plugin/interface/IPlugin";
 import IHasContainerController from "@gluestack/framework/types/plugin/interface/IHasContainerController";
-import GluestackWatcher from '../helpers/GluestackWatcher';
+import GluestackWatcher from '../helpers/watcher';
 
 export function developWatch(program: any, glueStackPlugin: GlueStackPlugin) {
   const command = program

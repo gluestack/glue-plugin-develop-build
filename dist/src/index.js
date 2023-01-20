@@ -42,10 +42,11 @@ exports.__esModule = true;
 exports.GlueStackPlugin = void 0;
 var package_json_1 = __importDefault(require("../package.json"));
 var PluginInstance_1 = require("./PluginInstance");
-var developList_1 = require("./commands/developList");
-var developWatch_1 = require("./commands/developWatch");
-var developUp_1 = require("./commands/developUp");
-var developDown_1 = require("./commands/developDown");
+var route_generate_1 = require("./commands/route-generate");
+var develop_list_1 = require("./commands/develop-list");
+var develop_watch_1 = require("./commands/develop-watch");
+var develop_up_1 = require("./commands/develop-up");
+var develop_down_1 = require("./commands/develop-down");
 var build_1 = require("./commands/build");
 var GlueStackPlugin = (function () {
     function GlueStackPlugin(app, gluePluginStore) {
@@ -56,11 +57,12 @@ var GlueStackPlugin = (function () {
     }
     GlueStackPlugin.prototype.init = function () {
         var _this = this;
-        this.app.addCommand(function (program) { return (0, developList_1.developList)(program, _this); });
-        this.app.addCommand(function (program) { return (0, developUp_1.developUp)(program, _this); });
-        this.app.addCommand(function (program) { return (0, developDown_1.developDown)(program, _this); });
-        this.app.addCommand(function (program) { return (0, developWatch_1.developWatch)(program, _this); });
+        this.app.addCommand(function (program) { return (0, develop_list_1.developList)(program, _this); });
+        this.app.addCommand(function (program) { return (0, develop_up_1.developUp)(program, _this); });
+        this.app.addCommand(function (program) { return (0, develop_down_1.developDown)(program, _this); });
+        this.app.addCommand(function (program) { return (0, develop_watch_1.developWatch)(program, _this); });
         this.app.addCommand(function (program) { return (0, build_1.build)(program, _this); });
+        this.app.addCommand(function (program) { return (0, route_generate_1.routeGenerate)(program, _this); });
     };
     GlueStackPlugin.prototype.destroy = function () {
     };
